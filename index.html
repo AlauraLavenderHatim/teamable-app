@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Teamable</title>
+        <link rel="stylesheet" href="style.css"/>
+        <script src="app.js"></script>
+        <script src="https://unpkg.com/validator@latest/validator.min.js"></script>
+    </head>
+    <body>
+        <div id="display">
+            <h1>User profile</h1> 
+            <img src="shire.png">
+
+            <span>Name: </span><b id="name">Anna Smith</b>
+            <hr />
+
+            <span>Email: </span><b id="email">anna@smith.com</b>
+            <hr />
+
+            <span>Hobbies: </span><b id="hobbies">Coding, reading, knitting</b>
+            <hr />
+
+            <button onclick="HandleEditProfile()">Edit Profile</button>
+       </div>
+       <div id="edit">
+            <h1>User profile</h1> 
+            <img src="shire.png">
+
+            <span>Name: </span>
+            <input type="text" id="input-name" placeholder="Anna Smith"/>
+            <hr />
+
+            <span>Email: </span>
+            <input type="email" id="input-email" placeholder="anna@smith.com"/>
+            <hr />
+
+            <span>Hobbies: </span>
+            <input type="text" id="input-hobbies" placeholder="Coding, reading, knitting"/>
+            <hr />
+
+            <button onclick="HandleUpdateProfile()">Update Profile</button>
+       </div>
+    </body>
+</html>
