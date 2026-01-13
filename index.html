@@ -2,14 +2,14 @@
 <html>
     <head>
         <title>Teamable</title>
-        <link rel="stylesheet" href="style.css"/>
+        <!--<link rel="stylesheet" href="style.css"/>
         <script src="app.js"></script>
-        <script src="https://unpkg.com/validator@latest/validator.min.js"></script>
+        <script src="https://unpkg.com/validator@latest/validator.min.js"></script> -->
     </head>
     <body>
         <div id="display">
             <h1>User profile</h1> 
-            <img src="shire.png">
+            <img src="shire.png" alt="shire image">
 
             <span>Name: </span><b id="name">Anna Smith</b>
             <hr />
@@ -24,7 +24,7 @@
        </div>
        <div id="edit">
             <h1>User profile</h1> 
-            <img src="shire.png">
+            <img src="shire.png" alt="shire image 2">
 
             <span>Name: </span>
             <input type="text" id="input-name" placeholder="Anna Smith"/>
@@ -42,3 +42,121 @@
        </div>
     </body>
 </html>
+
+ <style>
+
+#edit{
+    display: none;
+}
+
+img{
+    display: block;
+    width: 320px;
+    margin-bottom: 20px;
+}
+div{
+    width: 80%;
+    margin: 40px auto;
+}
+hr{
+    width: 400px;
+    margin-left: 0;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+button{
+    width: 160px;
+    height: 40px;
+    font-size: 15px;
+    border-radius: 5px;
+}
+button:hover{
+    cursor: pointer;
+}
+</style>
+
+<script>
+    async function loadProfile() {
+  try {
+    const res = await fetch('/get-profile');
+    const data = await res.json();
+    if (data) {
+      document.getElementById("name").textContent = data.name || "Anna Smith";
+      document.getElementById("email").textContent = data.email || "anna@smith.com";
+      document.getElementById("hobbies").textContent = data.hobbies || "Coding, reading, knitting";
+    }
+  } catch (err) {
+    console.error("Error loading profile:", err);
+  }
+}
+
+// Load profile when page loads
+window.onload = loadProfile;
+
+function HandleEditProfile(){
+    var name = document.getElementById("name").textContent;
+    var inputname = document.getElementById("input-name");
+    inputname.value = name;
+
+    var email = document.getElementById("email").textContent;
+    var inputemail = document.getElementById("input-email");
+    inputemail.value = email;
+
+    var hobbies = document.getElementById("hobbies").textContent;
+    var inputhobbies = document.getElementById("input-hobbies");
+    inputhobbies.value = hobbies;
+    
+    document.getElementById("edit").style.display = "block";
+    document.getElementById("display").style.display = "none";
+}
+
+
+   async function HandleUpdateProfile() {
+
+  // 1. Get values from input fields
+  var updatedname = document.getElementById("input-name").value;
+  var updatedemail = document.getElementById("input-email").value;
+  var updatedhobbies = document.getElementById("input-hobbies").value;
+
+  // 2. Validate email
+  if (!isValidEmail(updatedemail)) {
+    alert("Wrong Email Format");
+    return;
+  }
+
+  // 3. Update the display profile
+  document.getElementById("name").textContent = updatedname;
+  document.getElementById("email").textContent = updatedemail;
+  document.getElementById("hobbies").textContent = updatedhobbies;
+
+  // 4. Switch back to display mode
+  document.getElementById("edit").style.display = "none";
+  document.getElementById("display").style.display = "block";
+
+  // 5. Send updated data to backend
+  try {
+    const res = await fetch('/update-profile', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        name: updatedname,
+        email: updatedemail,
+        hobbies: updatedhobbies
+      })
+    });
+
+    const result = await res.json();
+    console.log("Profile updated:", result);
+
+  } catch (err) {
+    console.error("Error updating profile:", err);
+  }
+}
+
+
+
+function isValidEmail(email) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+}
+
+</script>
