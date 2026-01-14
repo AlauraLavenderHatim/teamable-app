@@ -19,7 +19,7 @@ app.get('/shire.png', (req, res) => {
 
 
 // MongoDB connection string (connects to Docker container from host)
-const mongoUrl = "mongodb://admin:password@127.0.0.1:27017/user-account?authSource=admin";
+const mongoUrl = "mongodb://admin:password@mongodb";
 
 
 // Database and collection

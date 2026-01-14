@@ -1,5 +1,9 @@
 version: '3'
 services:
+  teamable:
+    image: 165.22.16.64:8083/teamable:1.0
+    ports:
+    - "3000:3000"
   mongodb:
     image: mongo
     container_name: mongodb 
