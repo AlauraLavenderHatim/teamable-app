@@ -12,3 +12,5 @@ COPY . /home/app
 RUN npm install 
 
 CMD ["node", "server.js"]
+
+
