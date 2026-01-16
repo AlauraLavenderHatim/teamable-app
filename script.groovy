@@ -4,6 +4,7 @@ def buildApp() {
                         sh 'docker build -t alavenderhat/teamable-app:tma-1.0 .'
                         sh 'echo $PASS | docker login -u $USER --password-stdin'
                         sh 'docker push alavenderhat/teamable-app:tma-1.0'
+    }                    
 }
 
 def testApp() {
