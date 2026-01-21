@@ -1,3 +1,11 @@
+#!/user/bin/env groovy
+
+library identifier: 'jenkins-shared-library@master', retriever: modernSCM(
+    [$class: 'GitSCMSource',
+    remote: 'https://github.com/AlauraLavenderHatim/jenkins-shared-lib',
+    credentialsId: 'gitlab-credentials']
+)
+
 def gv
 
 pipeline {
@@ -6,14 +14,14 @@ pipeline {
         stage("init") {
             steps {
                 script {
-                    gv = load "script.groovy"
+                    
                 }
             }
         }
         stage("build image") {
             steps {
                 script {
-                    gv.buildApp()
+                    buildApp 'alavenderhat/teamable-app:tma-3.0'
                     }
                 }
             }
@@ -21,14 +29,14 @@ pipeline {
         stage("test") {
             steps {
                 script {
-                    gv.testApp()
+                    testApp()
                 }
             }
         }
         stage('deploy') {
             steps {
                 script {
-                    gv.deployApp()
+                    deployApp()
                 }
             }
         }
