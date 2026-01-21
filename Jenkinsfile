@@ -54,7 +54,7 @@ pipeline {
 
                     sh "git remote set-url origin https://${USER}:${PASS}@github.com/AlauraLavenderHatim/teamable-app.git"
                     sh 'git add .'
-                    sh 'git commit -m "image tag increase'
+                    sh 'git commit -m "image tag increase"'
                     sh 'git push HEAD:jenkins-jobs'
                   } 
                 }
