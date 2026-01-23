@@ -39,7 +39,7 @@ pipeline {
                 script {
                     def dockerCmd = 'docker run -d -p 3000:3000 alavenderhat/teamable-app:13'
                     sshagent(['ec2-user-server']) {
-                        sh "ssh -o StrictHostKeyChecking=no ec2@user@16.171.39.58 ${dockerCmd}"
+                        sh "ssh -o StrictHostKeyChecking=no ec2-user@16.171.39.58 ${dockerCmd}"
                     }
                 }
             }
